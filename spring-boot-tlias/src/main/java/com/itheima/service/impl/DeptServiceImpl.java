@@ -1,5 +1,6 @@
 package com.itheima.service.impl;
 
+import com.itheima.anno.Log;
 import com.itheima.anno.MyLog;
 import com.itheima.mapper.DeptMapper;
 import com.itheima.mapper.EmpMapper;
@@ -31,20 +32,22 @@ public class DeptServiceImpl implements DeptService {
         return deptList;
     }
 
+    @Log
     @Override
     public void addDept(Dept dept) {
         deptMapper.addDept(dept);
     }
 
+    @Log
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteDept(Integer id) throws Exception {
         try {
             // 根据id删除部门
             deptMapper.deleteDept(id);
-            if (true) {
-                throw new Exception("出现异常了~~~");
-            }
+//            if (true) {
+//                throw new Exception("出现异常了~~~");
+//            }
             // 根据部门ID
             empMapper.deleteByDepId(id);
         } finally {
@@ -56,6 +59,7 @@ public class DeptServiceImpl implements DeptService {
 
     }
 
+    @Log
     @Override
     public void updateDept(Dept dept) {
         deptMapper.updateDept(dept);
